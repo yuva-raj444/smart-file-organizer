@@ -29,6 +29,7 @@ class FileOrganizer(QWidget):
     def init_ui(self):
         main_layout = QVBoxLayout()
 
+        # App Logo
         logo_label = QLabel()
         logo_path = BASE_DIR + "/resources/logo.png"
         if logo_path:
@@ -39,17 +40,20 @@ class FileOrganizer(QWidget):
                 logo_label.setAlignment(Qt.AlignCenter)
                 main_layout.addWidget(logo_label)
 
+        # Heading
         self.label = QLabel("Select Folder to Organize")
         self.label.setAlignment(Qt.AlignCenter)
         self.label.setStyleSheet("font-size: 48px; padding: 20px; font-weight: bold;")
         main_layout.addWidget(self.label)
 
+        # Browse Button
         self.browse_btn = QPushButton("Browse Folder")
         self.browse_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.browse_btn.setStyleSheet(self.button_style(font_size="36px"))
         self.browse_btn.clicked.connect(self.select_folder)
         main_layout.addWidget(self.browse_btn)
 
+        # File Type Checkboxes
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
         checkbox_container = QFrame()
@@ -66,16 +70,24 @@ class FileOrganizer(QWidget):
         scroll_area.setWidget(checkbox_container)
         main_layout.addWidget(scroll_area, stretch=4)
 
+        # Organize Button
         self.organize_btn = QPushButton("✨ Organize Now")
         self.organize_btn.setCursor(QCursor(Qt.PointingHandCursor))
         self.organize_btn.setStyleSheet(self.button_style(font_size="36px"))
         self.organize_btn.clicked.connect(self.organize_files)
         main_layout.addWidget(self.organize_btn)
 
+        # Result Box
         self.result_box = QTextEdit()
         self.result_box.setReadOnly(True)
         self.result_box.setStyleSheet("background-color: #2d2d3a; border-radius: 15px; padding: 20px; font-size: 30px;")
         main_layout.addWidget(self.result_box, stretch=3)
+
+        # Watermark Footer
+        footer_label = QLabel("Smart File Organizer • Crafted by Yuvaraj G")
+        footer_label.setAlignment(Qt.AlignCenter)
+        footer_label.setStyleSheet("color: gray; font-size: 30px; padding: 10px;")
+        main_layout.addWidget(footer_label)
 
         self.setLayout(main_layout)
         self.add_hover_animation(self.browse_btn)
